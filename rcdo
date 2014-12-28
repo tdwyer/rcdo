@@ -1,0 +1,30 @@
+#!/bin/ksh
+
+_rv=0
+
+if [[ -z $EDITOR ]] ;then
+	export EDITOR="/usr/bin/mg"
+fi
+
+RCD="/etc/rc.d"
+CHMOD="/bin/chmod"
+
+if [[ ! -z ${1} && ! -z ${2} && -x "${RCD}/${1}"  ]] ;then
+	case "${2}" in
+		"edit")
+				${CHMOD} u+w "${RCD}/${1}"
+				${EDITOR} "${RCD}/${1}"
+				${CHMOD} u-w "${RCD}/${1}"
+		;;
+		start|stop|restart|reload|check)
+				/bin/sh /etc/rc.d/${1} ${2}
+				_rv=${?}
+		;;
+		*)
+				echo "Usage: ${0} (edit|start|stop|restart|reload|check)"
+				_rv=2
+		;;
+	esac
+fi
+
+exit $_rv
