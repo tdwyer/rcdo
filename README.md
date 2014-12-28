@@ -2,7 +2,7 @@ rcdo - OpenBSD Service Management Program
 -----------------------------------------
 
 
-`rcdo` is a /etc/rc.d service management program written in AWK and no more complicated the what is absolutely necessary.
+`rcdo` is a /etc/rc.d service management program written in `/bin/sh` and no more complicated the what is absolutely necessary.
 
 
 Features
